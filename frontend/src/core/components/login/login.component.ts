@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserLogin } from "./UserLogin";
+import { UserLogin } from "../../../app/models/user/UserLogin";
 
 @Component({
   selector: 'app-gamestore-login',
