@@ -3,30 +3,38 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from '../core/components/navbar/navbar.component';
-import { LoginButtonComponent } from '../core/components/login/login-button.component';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from '../core/components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { CoreModule } from 'src/core/core.module';
+import { CoreModule } from './core/core.module';
+import { HomeComponent } from './components/home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserModule } from './components/user/user.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, 
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     RouterModule.forRoot([
       {
-        path: 'login',
-        component: LoginComponent
+        path: '',
+        component: HomeComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: '**',
+        redirectTo: '' // Redirect to home for a while
       }
     ]),
     FormsModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule,
+    UserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

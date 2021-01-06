@@ -1,0 +1,3 @@
+<button *ngIf="!isLoggedIn()" type="button" [routerLink]="['/login']" class="btn btn-outline-success" href="#">Sign In</button>
+<button *ngIf="isLoggedIn()" type="button" [routerLink]="['/profile']" class="btn btn-primary" href="#">Profile</button>
+<button *ngIf="isLoggedIn()" type="button" [routerLink]="['/']" class="btn btn-outline-danger" href="#" (click)="logout()">Sign Out</button>
