@@ -32,7 +32,7 @@
   <div class="invalid-feedback" *ngIf="userLoginPassword.invalid && userLoginPassword.dirty">
     The field user password is required!
   </div>
-  <app-gamestore-alert [dismissible]="true" type="danger" *ngIf="loginFailed">Usuário ou senha incorretos</app-gamestore-alert>
+  <app-gamestore-alert [dismissible]="true" type="danger" *ngIf="loginFailed">Incorrect user email or password</app-gamestore-alert>
 
   <div class="checkbox mb-3">
     <label>
