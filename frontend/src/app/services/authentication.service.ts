@@ -14,7 +14,7 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) {}
 
   login(userLogin: UserLogin): Observable<UserToken> {
-    return this.httpClient.post<UserToken>(`${this._baseUrl}/login`, userLogin);
+    return this.httpClient.post<UserToken>(`${this._baseUrl}/auth/login`, userLogin);
   }
 
   logout() {

@@ -1,12 +1,11 @@
-package br.com.luisccomp.backend.domain.model.entity.extension.entity.user
+package br.com.luisccomp.backend.domain.model.extension.entity.user
 
 import br.com.luisccomp.backend.domain.model.entity.user.User
 import br.com.luisccomp.backend.domain.model.entity.user.UserDetailsImpl
 import br.com.luisccomp.backend.domain.model.response.user.UserCreateResponse
 import br.com.luisccomp.backend.domain.model.response.user.UserProfileResponse
-import org.springframework.security.core.userdetails.UserDetails
 
-fun User.toUserDetails(): UserDetails = UserDetailsImpl(this)
+fun User.toUserDetails() = UserDetailsImpl(this)
 
 fun User.toUserCreateResponse() = UserCreateResponse(
         id = this.id,

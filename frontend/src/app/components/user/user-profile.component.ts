@@ -9,11 +9,16 @@ export class UserProfileComponent implements OnInit {
 
   user: User;
 
+  schema: string[];
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.profile().subscribe({
-      next: user => this.user = user,
+      next: user => {
+        this.user = user;
+        this.schema = Object.keys(user);
+      },
       error: err => console.log('Error: ', err)
     });
   }

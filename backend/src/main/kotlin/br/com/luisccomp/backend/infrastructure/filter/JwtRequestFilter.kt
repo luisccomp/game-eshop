@@ -1,15 +1,13 @@
-package br.com.luisccomp.backend.infrastructure.components
+package br.com.luisccomp.backend.infrastructure.filter
 
+import br.com.luisccomp.backend.infrastructure.component.JwtTokenUtil
 import br.com.luisccomp.backend.service.user.impl.UserDetailsServiceImpl
 import io.jsonwebtoken.ExpiredJwtException
-import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
-import java.lang.IllegalArgumentException
-import java.security.Security
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -19,7 +17,6 @@ class JwtRequestFilter(
         private val userDetailsService: UserDetailsServiceImpl,
         private val jwtTokenUtil: JwtTokenUtil
 ) : OncePerRequestFilter() {
-
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
         val authorization = request.getHeader("Authorization")
 
@@ -61,5 +58,4 @@ class JwtRequestFilter(
             chain.doFilter(request, response)
         }
     }
-
 }

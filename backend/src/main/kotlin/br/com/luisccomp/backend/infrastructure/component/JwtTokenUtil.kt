@@ -1,4 +1,4 @@
-package br.com.luisccomp.backend.infrastructure.components
+package br.com.luisccomp.backend.infrastructure.component
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts

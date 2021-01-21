@@ -4,7 +4,7 @@ import br.com.luisccomp.backend.domain.model.entity.user.UserDetailsImpl
 import br.com.luisccomp.backend.domain.model.request.user.UserAuthenticationRequest
 import br.com.luisccomp.backend.domain.model.response.user.UserAuthenticationResponse
 import br.com.luisccomp.backend.exception.UnauthorizedException
-import br.com.luisccomp.backend.infrastructure.components.JwtTokenUtil
+import br.com.luisccomp.backend.infrastructure.component.JwtTokenUtil
 import br.com.luisccomp.backend.service.authentication.AuthenticationService
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
@@ -19,18 +19,15 @@ class AuthenticationServiceImpl(
         private val jwtTokenUtil: JwtTokenUtil,
         private val authenticationManager: AuthenticationManager
 ) : AuthenticationService {
-
     override fun login(userAuthenticationRequest: UserAuthenticationRequest): UserAuthenticationResponse {
         authenticate(userAuthenticationRequest.email, userAuthenticationRequest.password)
 
-        val userDetails = userDetailsService.loadUserByUsername(userAuthenticationRequest.email)
+        val userDetails = userDetailsService.loadUserByUsername(userAuthenticationRequest.email) as UserDetailsImpl
 
-        val claims = (userDetails as UserDetailsImpl).let {
-            mutableMapOf(
-                    Pair("id", it.user.id as Any),
-                    Pair("roles", it.user.roles as Any)
-            )
-        }
+        val claims = mutableMapOf(
+                Pair("id", userDetails.user.id as Any),
+                Pair("email", userDetails.username as Any)
+        )
 
         return UserAuthenticationResponse(
                 token = jwtTokenUtil.generateToken(userDetails, claims)
@@ -46,5 +43,4 @@ class AuthenticationServiceImpl(
             throw UnauthorizedException("Invalid username or password")
         }
     }
-
 }

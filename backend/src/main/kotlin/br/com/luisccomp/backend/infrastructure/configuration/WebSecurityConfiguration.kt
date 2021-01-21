@@ -1,6 +1,6 @@
 package br.com.luisccomp.backend.infrastructure.configuration
 
-import br.com.luisccomp.backend.infrastructure.components.JwtRequestFilter
+import br.com.luisccomp.backend.infrastructure.filter.JwtRequestFilter
 import br.com.luisccomp.backend.service.user.impl.UserDetailsServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -25,7 +25,6 @@ class WebSecurityConfiguration(
         private val userDetailsService: UserDetailsServiceImpl,
         private val jwtRequestFilter: JwtRequestFilter
 ) : WebSecurityConfigurerAdapter() {
-
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
@@ -41,6 +40,7 @@ class WebSecurityConfiguration(
         http
                 // We don't need CSRF for this example
                 .cors().and().csrf().disable()
+                .headers().frameOptions().sameOrigin().and()
 
                 .exceptionHandling().authenticationEntryPoint { _, response, _ ->
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
@@ -49,7 +49,8 @@ class WebSecurityConfiguration(
 
                 // don't authenticate this particular request
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/public/**").permitAll()
 
                 // all other requests need to be authenticated
@@ -64,5 +65,4 @@ class WebSecurityConfiguration(
                 .and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)
     }
-
 }

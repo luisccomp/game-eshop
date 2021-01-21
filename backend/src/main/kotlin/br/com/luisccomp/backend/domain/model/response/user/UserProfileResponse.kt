@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class UserProfileResponse(
         @JsonProperty("id")
-        val id: Long?,
+        val id: Long? = null,
 
         @JsonProperty("first_name")
         val firstName: String,
@@ -16,5 +16,5 @@ data class UserProfileResponse(
         val email: String,
 
         @JsonProperty("description")
-        val description: String?
+        val description: String? = null
 )

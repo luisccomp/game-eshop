@@ -2,8 +2,10 @@ package br.com.luisccomp.backend.domain.model.entity.user
 
 import org.springframework.security.core.userdetails.UserDetails
 
-class UserDetailsImpl(val user: User): UserDetails {
-    override fun getAuthorities() = user.roles
+class UserDetailsImpl(
+        val user: User
+) : UserDetails {
+    override fun getAuthorities() = user.roles.map { it.role }
 
     override fun getPassword() = user.password
 

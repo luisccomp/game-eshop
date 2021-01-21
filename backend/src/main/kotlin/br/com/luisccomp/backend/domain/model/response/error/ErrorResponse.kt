@@ -2,7 +2,7 @@ package br.com.luisccomp.backend.domain.model.response.error
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class ErrorResponse(
+data class ErrorResponse(
         @JsonProperty("status")
         val status: Int,
 
@@ -10,5 +10,13 @@ class ErrorResponse(
         val message: String? = null,
 
         @JsonProperty("details")
-        val details: Array<Any>? = null
-)
+        val details: Any? = null
+) {
+    internal data class ErrorResponseDetail(
+            @JsonProperty("field")
+            val field: String,
+
+            @JsonProperty("error")
+            val error: String
+    )
+}

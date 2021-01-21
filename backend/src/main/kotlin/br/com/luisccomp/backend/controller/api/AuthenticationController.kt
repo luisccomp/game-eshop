@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import javax.validation.Valid
 
-@RequestMapping("/login")
+@RequestMapping("/auth")
 interface AuthenticationController {
-
-    @PostMapping
-    fun login(
-            @RequestBody @Valid userAuthenticationRequest: UserAuthenticationRequest
-    ): ResponseEntity<UserAuthenticationResponse>
-
+    @PostMapping("/login")
+    fun login(@RequestBody @Valid userAuthenticationRequest: UserAuthenticationRequest): ResponseEntity<UserAuthenticationResponse>
 }

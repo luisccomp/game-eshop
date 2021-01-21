@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class JacksonConfiguration {
-
     @Bean
     fun objectMapper(): ObjectMapper = ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -18,5 +17,4 @@ class JacksonConfiguration {
             .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
             .registerModule(JavaTimeModule())
             .registerModule(KotlinModule())
-
 }

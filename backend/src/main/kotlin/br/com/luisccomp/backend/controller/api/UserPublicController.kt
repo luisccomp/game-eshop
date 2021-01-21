@@ -10,8 +10,6 @@ import javax.validation.Valid
 
 @RequestMapping("/public/api/users")
 interface UserPublicController {
-    
     @PostMapping
-    fun create(@RequestBody @Valid userCreateRequest: UserCreateRequest): ResponseEntity<UserCreateResponse>
-
+    fun createUser(@RequestBody @Valid createRequest: UserCreateRequest): ResponseEntity<UserCreateResponse>
 }

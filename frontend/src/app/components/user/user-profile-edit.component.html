@@ -1,1 +1,55 @@
-User profile edit
+<div *ngIf="user" class="container">
+  <h1>Edit profile</h1>
+  <hr/>  
+  <form #updateForm="ngForm">
+    <div class="form-group row">
+      <label for="first_name" class="col-sm-2 col-form-label">First Name:</label>
+      <div class="col-sm-4">
+        <input id="first_name"
+          name="first_name"
+          [(ngModel)]="user.first_name"
+          #userFirstName="ngModel"
+          class="form-control"
+          required
+          [ngClass]="{'is-invalid': userFirstName.invalid && userFirstName.dirty}"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="last_name" class="col-sm-2 col-form-label">Last Name:</label>
+      <div class="col-sm-4">
+        <input id="last_name"
+          name="last_name"
+          [(ngModel)]="user.last_name"
+          #userLastName="ngModel"
+          class="form-control"
+          required
+          [ngClass]="{'is-invalid': userLastName.invalid && userLastName.dirty}"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">Email:</label>
+      <div class="col-sm-4">
+        <input type="text" readonly class="form-control" id="email" [value]="user.email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label">Description:</label>
+      <div class="col-sm-4">
+        <textarea id="description"
+          name="description"
+          [(ngModel)]="user.description"
+          #userDescription="ngModel"
+          class="form-control"
+          rows="5"
+        >
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <button [routerLink]="['/profile']" type="button" class="btn btn-link">Back to profile</button>
+      <button type="button" class="btn btn-primary" (click)="updateProfile()">Save</button>
+    </div>
+  </form>
+</div>    

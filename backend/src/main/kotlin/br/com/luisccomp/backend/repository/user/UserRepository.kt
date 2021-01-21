@@ -6,10 +6,8 @@ import org.springframework.stereotype.Repository
 import java.util.Optional
 
 @Repository
-interface UserRepository : JpaRepository<User, Long?> {
-
+interface UserRepository : JpaRepository<User, Long> {
     fun existsByEmail(email: String): Boolean
 
     fun findByEmail(email: String): Optional<User>
-
 }

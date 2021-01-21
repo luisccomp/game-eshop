@@ -7,11 +7,13 @@ import javax.validation.constraints.NotBlank
 
 data class UserAuthenticationRequest(
         @JsonProperty("email")
-        @field:Email(message = "email should contains a valid email address")
+        @field:NotBlank(message = "Field \"email\" doesn't allow empty strings")
+        @field:Email(message = "Field \"email\" must contain a valid email address")
+        @field:Length(max = 255, message = "Field \"email\" must contain up to 255 characters")
         val email: String,
 
         @JsonProperty("password")
-        @field:NotBlank(message = "password name should not contains an empty string")
-        @field:Length(min = 8, max = 20, message = "Password must have length between 8 and 20 characters")
+        @field:NotBlank(message = "Field \"password\" doesn't allow empty strings")
+        @field:Length(max = 255, message = "Field \"password\" must contain up to 255 characters")
         val password: String
 )
